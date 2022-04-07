@@ -57,15 +57,11 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css']
   },
   devServer: {
-    // proxy: { // proxy URLs to backend development server
-    //   '/api': 'http://localhost:3000'
-    // },
-    static: path.join(__dirname, 'dist'), // boolean | string | array | object, static file location
-    compress: true, // enable gzip compression
-    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
-    https: false, // true for self-signed, object for cert authority
-    // ...
+    static: path.join(__dirname, 'dist'), 
+    compress: true, 
+    historyApiFallback: true, 
+    hot: true, 
+    https: false, 
   },
   optimization: {
     splitChunks: {
