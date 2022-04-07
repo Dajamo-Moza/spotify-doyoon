@@ -5,8 +5,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
-    print: './src/print.js'
+    index: './src/index.ts',
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -24,6 +23,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.ts$/i,
+        use: 'ts-loader',
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
