@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import baseTheme from './styles/baseTheme';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={baseTheme}></ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function RootWithCallbackAfterRender() {
+  useEffect(() => {
+    console.log('rendered');
+  });
+
+  return (
+    <React.StrictMode>
+      <ThemeProvider theme={baseTheme}></ThemeProvider>
+    </React.StrictMode>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<RootWithCallbackAfterRender />);

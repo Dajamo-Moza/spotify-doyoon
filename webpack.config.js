@@ -4,14 +4,12 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    index: './src/index.ts',
-  },
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   devtool: 'inline-source-map',
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'Output Management'
-    })
+      title: 'Output Management',
+    }),
   ],
   output: {
     filename: '[name].[contenthash].js',
@@ -22,12 +20,13 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.ts$/i,
         use: 'ts-loader',
       },
+      { test: /\.(jsx|tsx)$/i, exclude: /node_modules$/, use: 'babel-loader' },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -54,17 +53,17 @@ module.exports = {
       //     preset: ['es2015']
       //   }
       // },
-    ]
+    ],
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css']
+    extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
   },
   devServer: {
-    static: path.join(__dirname, 'dist'), 
-    compress: true, 
-    historyApiFallback: true, 
-    hot: true, 
-    https: false, 
+    static: path.join(__dirname, 'dist'),
+    compress: true,
+    historyApiFallback: true,
+    hot: true,
+    https: false,
   },
   optimization: {
     splitChunks: {
@@ -73,8 +72,8 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           chunks: 'all',
-        }
-      }
-    }
-  }
-}
+        },
+      },
+    },
+  },
+};
