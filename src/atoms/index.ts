@@ -1,5 +1,5 @@
 import { atom, atomFamily } from 'recoil';
-import { TodoContent } from '../../types';
+import { TodoContent } from '../types/common';
 
 export const todoContentState = atom<TodoContent[]>({
   key: 'todoContents',
