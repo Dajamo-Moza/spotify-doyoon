@@ -7,11 +7,12 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "jsx": "react"
   },
   "include": ["./src/**/*", "custom.d.ts"],
   "exclude": ["node_modules"],
   "paths": {
     "@/components/*": ["src/components/*"],
-    "@/hooks/*": ["src/hooks/*"],
-  },
+    "@/hooks/*": ["src/hooks/*"]
+  }
 }
