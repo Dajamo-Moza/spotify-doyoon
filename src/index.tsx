@@ -13,7 +13,9 @@ function RootWithCallbackAfterRender() {
   return (
     <React.StrictMode>
       <ThemeProvider theme={baseTheme}>
-        <Main />
+        <RecoilRoot>
+          <Main />
+        </RecoilRoot>
       </ThemeProvider>
     </React.StrictMode>
   );
