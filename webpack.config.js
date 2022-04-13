@@ -4,7 +4,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: './src/index.tsx',
   devtool: 'inline-source-map',
   plugins: [
     new HTMLWebpackPlugin({
@@ -23,10 +23,17 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.ts$/i,
+        test: /\.tsx?$/i,
+        exclude: /node_modules/,
         use: 'ts-loader',
       },
-      { test: /\.(jsx|tsx)$/i, exclude: /node_modules$/, use: 'babel-loader' },
+      {
+        test: /\.jsx?$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
