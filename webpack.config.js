@@ -8,7 +8,8 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'Output Management',
+      title: 'Trello project',
+      template: './src/index.html',
     }),
   ],
   output: {

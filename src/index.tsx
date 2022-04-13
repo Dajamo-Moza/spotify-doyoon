@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import baseTheme from './styles/baseTheme';
-import Main from './pages/Main'
+import Main from './pages/Main';
 
 function RootWithCallbackAfterRender() {
   useEffect(() => {
@@ -19,5 +19,6 @@ function RootWithCallbackAfterRender() {
   );
 }
 
-const root = createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
 root.render(<RootWithCallbackAfterRender />);
