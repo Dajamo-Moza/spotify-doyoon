@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from '../components/Button';
+import SideBar from '../components/Sidebar';
 
 function Main() {
   return (
     <div>
-      <Button />
+      <SideBar />
     </div>
   );
 }
