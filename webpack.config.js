@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'Trello project',
+      title: 'Spotify project',
       template: './src/index.html',
     }),
   ],
@@ -50,27 +50,21 @@ module.exports = {
           parse: yaml.parse,
         },
       },
-      // {
-      //   test: /\.jsx?$/,
-      //   include: [
-      //     path.resolve(__dirname, 'app')
-      //   ],
-      //   exclude: /node_modules/,
-      //   loader: 'babel-loader',
-      //   options: {
-      //     preset: ['es2015']
-      //   }
-      // },
     ],
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
+    alias: {
+      '@/components': path.resolve(__dirname, 'src/components/'),
+      '@/pages': path.resolve(__dirname, 'src/pages/'),
+      '@/hooks': path.resolve(__dirname, 'src/hooks/'),
+      '@/assets': path.resolve(__dirname, 'public/assets/'),
+    },
   },
   devServer: {
     static: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
-    hot: true,
     https: false,
   },
   optimization: {

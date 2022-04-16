@@ -1,11 +1,12 @@
 import React from 'react';
-import Button from '../components/Button';
+import Layout from '@/components/Layout';
+import SideBar from '@/components/Sidebar';
 
 function Main() {
   return (
-    <div>
-      <Button />
-    </div>
+    <Layout>
+      <SideBar />
+    </Layout>
   );
 }
 

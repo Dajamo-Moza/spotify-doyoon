@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { RecoilRoot } from 'recoil';
 import baseTheme from './styles/baseTheme';
+import GlobalStyles from './styles/globalStyles';
 import Main from './pages/Main';
 
 function RootWithCallbackAfterRender() {
@@ -11,13 +12,14 @@ function RootWithCallbackAfterRender() {
   });
 
   return (
-    <React.StrictMode>
+    <React.Fragment>
+      <GlobalStyles />
       <ThemeProvider theme={baseTheme}>
         <RecoilRoot>
           <Main />
         </RecoilRoot>
       </ThemeProvider>
-    </React.StrictMode>
+    </React.Fragment>
   );
 }
 
