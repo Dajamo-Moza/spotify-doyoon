@@ -56,7 +56,9 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
       '@/components': path.resolve(__dirname, 'src/components/'),
+      '@/pages': path.resolve(__dirname, 'src/pages/'),
       '@/hooks': path.resolve(__dirname, 'src/hooks/'),
+      '@/assets': path.resolve(__dirname, 'public/assets/'),
     },
   },
   devServer: {
