@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as SearchIcon from '@/assets/search.svg';
+import SearchIcon from '@/assets/search.svg';
 
 const SideBar = (): JSX.Element => {
   return (
     <StyledSideBar>
       <p>SIGN OUT</p>
       <p>RECOMMENDATIONS</p>
-      <div></div>
+      <SearchIcon />
     </StyledSideBar>
   );
 };
