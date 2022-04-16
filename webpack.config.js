@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'Trello project',
+      title: 'Spotify project',
       template: './src/index.html',
     }),
   ],
@@ -65,7 +65,6 @@ module.exports = {
     static: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
-    hot: true,
     https: false,
   },
   optimization: {
