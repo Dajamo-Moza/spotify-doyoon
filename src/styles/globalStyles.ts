@@ -21,6 +21,8 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-size: 1em;
     line-height: 1.5;
+    margin: 0;
+    padding: 0;
   }
 
   h1,

@@ -7,6 +7,7 @@ const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
 
 const StyledLayout = styled.div`
   width: 100vw;
+  display: flex;
   padding: ${({ theme: { gutter } }) => `${gutter.size136} ${gutter.size88} ${gutter.size28}`};
   background-color: ${(props) => props.theme.color.primary};
   font-size: ${(props) => props.theme.font.size16};

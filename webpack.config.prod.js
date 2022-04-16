@@ -65,12 +65,6 @@ module.exports = {
       '@/assets': path.resolve(__dirname, 'public/assets/'),
     },
   },
-  devServer: {
-    static: path.join(__dirname, 'dist'),
-    compress: true,
-    historyApiFallback: true,
-    https: false,
-  },
   optimization: {
     splitChunks: {
       cacheGroups: {
