@@ -2,6 +2,7 @@ const font = {
   size16: '1.6rem',
   size18: '1.8rem',
   size22: '2.2rem',
+  size80: '8rem',
 };
 
 const color = {

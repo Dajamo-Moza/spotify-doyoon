@@ -7,3 +7,9 @@ export interface TodoContent {
   title: string;
   description: string;
 }
+
+export interface AlbumImage {
+  width: number;
+  height: number;
+  url: string;
+}
