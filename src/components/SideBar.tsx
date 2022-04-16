@@ -20,8 +20,10 @@ const SideBar = (): JSX.Element => {
 };
 
 const StyledSideBar = styled.div`
-  padding: ${(props) => props.theme.gutter.size20};
-  border: 1px solid blue;
+  font-weight: 700;
+  padding: ${(props) => `0 ${props.theme.gutter.size20}`};
+  border-left: 0.1rem solid ${(props) => props.theme.color.black};
+  border-right: 0.1rem solid ${(props) => props.theme.color.black};
   font-size: ${(props) => props.theme.font.size16};
 `;
 

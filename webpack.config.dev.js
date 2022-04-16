@@ -65,6 +65,7 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     https: false,
+    hot: true,
   },
   optimization: {
     splitChunks: {
