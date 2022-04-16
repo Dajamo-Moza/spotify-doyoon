@@ -1,4 +1,6 @@
 {
+  "include": ["src/**/*", "custom.d.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitAny": true,
@@ -7,12 +9,12 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "jsx": "react"
-  },
-  "include": ["src/**/*", "custom.d.ts"],
-  "exclude": ["node_modules"],
-  "paths": {
-    "@/components/*": ["src/components/*"],
-    "@/hooks/*": ["src/hooks/*"]
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/pages/*": ["pages/*"],
+      "@/hooks/*": ["hooks/*"]
+    }
   }
 }

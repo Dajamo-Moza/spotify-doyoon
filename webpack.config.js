@@ -54,6 +54,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
+    alias: {
+      '@/components': path.resolve(__dirname, 'src/components/'),
+      '@/hooks': path.resolve(__dirname, 'src/hooks/'),
+    },
   },
   devServer: {
     static: path.join(__dirname, 'dist'),
