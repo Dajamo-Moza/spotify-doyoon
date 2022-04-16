@@ -19,6 +19,7 @@ const gutter = {
   size24: '2.4rem',
   size28: '2.8rem',
   size32: '3.2rem',
+  size36: '3.6rem',
   size40: '4rem',
   size56: '5.6rem',
   size64: '6.4rem',

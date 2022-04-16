@@ -52,21 +52,21 @@ const AlbumList = (): JSX.Element => {
 
   return (
     <StyledAlbumList>
-      {data.map((item, index) => (
-        <AlbumItem
-          key={`album-item-${index}`}
-          count={index}
-          title={item.name}
-          artist={item.artists[0].name}
-          images={item.images}
-        />
-      ))}
+      {data.length > 0 &&
+        data.map((item, index) => (
+          <AlbumItem
+            key={`album-item-${index}`}
+            count={index}
+            title={item.name}
+            artist={item.artists[0].name}
+            images={item.images}
+          />
+        ))}
     </StyledAlbumList>
   );
 };
 
 const StyledAlbumList = styled.div`
-  border: 0.1rem solid red;
   display: flex;
   flex-basis: 70%;
 `;

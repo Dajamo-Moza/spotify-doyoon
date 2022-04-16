@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import GutterBox from '@/components/common/GutterBox';
 import { AlbumImage } from '@/types/common';
 import DynamicImage from './common/DynamicImage';
 
@@ -17,34 +16,49 @@ const AlbumItem = ({
 }): JSX.Element => {
   return (
     <StyledAlbumItem>
-      <DynamicImage images={images} />
-      <GutterBox margin={{ right: 'size56' }}>
+      <ImageContainer>
+        <DynamicImage images={images} />
+      </ImageContainer>
+      <ItemDesc>
         <Headline>{count}</Headline>
-      </GutterBox>
-      <div>
-        <Title>{title}</Title>
-        <Desc>{artist}</Desc>
-      </div>
+        <div>
+          <Title>{title}</Title>
+          <Desc>{artist}</Desc>
+        </div>
+      </ItemDesc>
     </StyledAlbumItem>
   );
 };
 
 const StyledAlbumItem = styled.div`
   display: flex;
-  flex-direction: row;
   width: 100%;
   font-weight: 700;
-  padding-bottom: ${(props) => props.theme.gutter.size56};
-  border-bottom: 0.1rem solid black;
+`;
+
+const ImageContainer = styled.div`
+  box-sizing: content-box;
+  padding: 0 ${(props) => props.theme.gutter.size20};
+  width: 14rem;
+  height: 12rem;
+`;
+
+const ItemDesc = styled.div`
+  display: flex;
+  flex-basis: 100%;
+  padding: 0 ${(props) => props.theme.gutter.size36};
+  border-left: 0.1rem solid ${(props) => props.theme.color.black};
+  border-bottom: 0.1rem solid ${(props) => props.theme.color.black};
 `;
 
 const Headline = styled.p`
   font-size: ${(props) => props.theme.font.size80};
+  margin-right: ${(props) => props.theme.gutter.size56};
 `;
 
 const Title = styled.h2`
   font-size: ${(props) => props.theme.font.size22};
-  margin-bottom: ${(props) => props.theme.font.size20};
+  margin-bottom: ${(props) => props.theme.gutter.size20};
 `;
 
 const Desc = styled.h3`
