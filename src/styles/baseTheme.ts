@@ -4,13 +4,30 @@ const font = {
   size22: '2.2rem',
 };
 
-const colors = {
+const color = {
   primary: '#1DB954',
   white: '#FFF',
   black: '#000',
 };
 
+const gutter = {
+  size8: '0.8rem',
+  size12: '1.2rem',
+  size16: '1.6rem',
+  size20: '2rem',
+  size24: '2.4rem',
+  size28: '2.8rem',
+  size32: '3.2rem',
+  size40: '4rem',
+  size56: '5.6rem',
+  size64: '6.4rem',
+  size84: '8.4rem',
+  size88: '8.8rem',
+  size136: '13.6rem',
+};
+
 export default {
   font,
-  colors,
+  color,
+  gutter,
 };

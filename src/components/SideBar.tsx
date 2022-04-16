@@ -10,9 +10,9 @@ const SideBar = (): JSX.Element => {
 };
 
 const StyledSideBar = styled.div`
-  padding: 1.2rem;
-  background-color: ${(props) => props.theme.colors.primary};
-  font-size: ${(props) => props.theme.font.size22};
+  padding: ${(props) => props.theme.gutter.size20};
+  background-color: ${(props) => props.theme.color.primary};
+  font-size: ${(props) => props.theme.font.size16};
 `;
 
 export default SideBar;

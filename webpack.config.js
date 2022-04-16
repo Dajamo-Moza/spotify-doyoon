@@ -50,17 +50,6 @@ module.exports = {
           parse: yaml.parse,
         },
       },
-      // {
-      //   test: /\.jsx?$/,
-      //   include: [
-      //     path.resolve(__dirname, 'app')
-      //   ],
-      //   exclude: /node_modules/,
-      //   loader: 'babel-loader',
-      //   options: {
-      //     preset: ['es2015']
-      //   }
-      // },
     ],
   },
   resolve: {
