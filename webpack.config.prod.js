@@ -36,12 +36,16 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.yaml$/i,
@@ -60,12 +64,6 @@ module.exports = {
       '@/hooks': path.resolve(__dirname, 'src/hooks/'),
       '@/assets': path.resolve(__dirname, 'public/assets/'),
     },
-  },
-  devServer: {
-    static: path.join(__dirname, 'dist'),
-    compress: true,
-    historyApiFallback: true,
-    https: false,
   },
   optimization: {
     splitChunks: {
