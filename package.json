@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "webpack serve --hot --config webpack.config.dev.js"
+    "start": "webpack serve --config webpack.config.dev.js --mode development"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/react": "^18.0.1",
     "@types/react-dom": "^18.0.0",
     "@types/styled-components": "^5.1.25",
+    "@types/webpack-env": "^1.16.4",
     "babel-loader": "^8.2.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.13.0",

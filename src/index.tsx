@@ -22,7 +22,10 @@ function RootWithCallbackAfterRender() {
     </React.Fragment>
   );
 }
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<RootWithCallbackAfterRender />);
+
+if (module.hot) {
+  module.hot.accept();
+}

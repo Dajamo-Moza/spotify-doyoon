@@ -5,13 +5,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
-  devtool: 'inline-source-map',
-  plugins: [
-    new HTMLWebpackPlugin({
-      title: 'Spotify project',
-      template: './src/index.html',
-    }),
-  ],
   module: {
     rules: [
       {
@@ -60,13 +53,18 @@ module.exports = {
       '@/assets': path.resolve(__dirname, 'public/assets/'),
     },
   },
+  devtool: 'source-map',
   devServer: {
-    static: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
-    https: false,
     hot: true,
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      title: 'Spotify project',
+      template: './src/index.html',
+    }),
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {
