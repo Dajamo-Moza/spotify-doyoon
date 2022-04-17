@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const axiosClient = axios.create({
@@ -17,8 +17,18 @@ interface AxiosCallType {
 export const useAxiosGet = async ({ initialValue, url, params, query }: AxiosCallType) => {
   const [responseValue, setResponseValue] = useState(initialValue);
 
-  const response = await axiosClient.get(url, { params });
-  setResponseValue(response);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axiosClient.get(url, { params });
+        setResponseValue(response);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  return { responseValue };
+    getData();
+  }, [url, params]);
+
+  return responseValue;
 };
