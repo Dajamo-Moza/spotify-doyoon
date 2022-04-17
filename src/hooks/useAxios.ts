@@ -4,7 +4,7 @@ import axios from 'axios';
 const axiosClient = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 1000,
-  headers: { Authorization: '' },
+  headers: { Authorization: process.env.AUTH_TOKEN },
 });
 
 interface AxiosCallType {

@@ -1,6 +1,7 @@
 const path = require('path');
 const yaml = require('yamljs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -65,6 +66,7 @@ module.exports = {
       title: 'Spotify project',
       template: './src/index.html',
     }),
+    new Dotenv(),
   ],
   optimization: {
     splitChunks: {
