@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
+import { useAxiosGet } from '@/hooks/useAxios';
 
 const AlbumList = (): JSX.Element => {
   const data = [
@@ -49,6 +50,17 @@ const AlbumList = (): JSX.Element => {
       uri: 'spotify:album:2oCAY48bhZvQte0l7apmYC',
     },
   ];
+
+  useEffect(() => {
+    const getListData = async () => {
+      await useAxiosGet({
+        initialValue: [],
+        url: '/',
+        params: {},
+      });
+    };
+    getListData();
+  }, []);
 
   return (
     <StyledAlbumList>
