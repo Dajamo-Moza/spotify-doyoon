@@ -1,14 +1,46 @@
-{
-  "id": "6242bde82d12fa5ca61a3cce",
-  "name": "sdfsdf",
-  "desc": "",
-  "descData": null,
-  "closed": false,
-  "dateClosed": null,
-  "idOrganization": "60acf75d9cf4b94ae622b7b7",
-  "idEnterprise": null,
-  "limits": null,
-  "pinned": null,
-  "starred": false,
-  "url": "https://trello.com/b/ENv2Qyru/sdfsdf"
-}
+[
+  {
+    "album_type": "single",
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4Kxlr1PRlDKEB0ekOCyHgX"
+        },
+        "href": "https://api.spotify.com/v1/artists/4Kxlr1PRlDKEB0ekOCyHgX",
+        "id": "4Kxlr1PRlDKEB0ekOCyHgX",
+        "name": "BIGBANG",
+        "type": "artist",
+        "uri": "spotify:artist:4Kxlr1PRlDKEB0ekOCyHgX"
+      }
+    ],
+    "available_markets": [""],
+    "external_urls": {
+      "spotify": "https://open.spotify.com/album/2oCAY48bhZvQte0l7apmYC"
+    },
+    "href": "https://api.spotify.com/v1/albums/2oCAY48bhZvQte0l7apmYC",
+    "id": "2oCAY48bhZvQte0l7apmYC",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/ab67616d0000b273bedf5e13937a9527ae87889d",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://i.scdn.co/image/ab67616d00001e02bedf5e13937a9527ae87889d",
+        "width": 300
+      },
+      {
+        "height": 64,
+        "url": "https://i.scdn.co/image/ab67616d00004851bedf5e13937a9527ae87889d",
+        "width": 64
+      }
+    ],
+    "name": "Still Life",
+    "release_date": "2022-04-05",
+    "release_date_precision": "day",
+    "total_tracks": 1,
+    "type": "album",
+    "uri": "spotify:album:2oCAY48bhZvQte0l7apmYC"
+  }
+]

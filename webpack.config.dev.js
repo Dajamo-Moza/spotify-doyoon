@@ -5,6 +5,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
+  target: 'node',
   module: {
     rules: [
       {
@@ -45,6 +46,7 @@ module.exports = {
     ],
   },
   resolve: {
+    modules: ['node_modules'],
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
       '@/components': path.resolve(__dirname, 'src/components/'),
