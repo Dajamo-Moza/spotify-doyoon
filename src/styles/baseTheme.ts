@@ -2,6 +2,7 @@ const font = {
   size16: '1.6rem',
   size18: '1.8rem',
   size22: '2.2rem',
+  size80: '8rem',
 };
 
 const color = {
@@ -18,6 +19,7 @@ const gutter = {
   size24: '2.4rem',
   size28: '2.8rem',
   size32: '3.2rem',
+  size36: '3.6rem',
   size40: '4rem',
   size56: '5.6rem',
   size64: '6.4rem',

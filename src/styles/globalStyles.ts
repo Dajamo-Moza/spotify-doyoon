@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1em;
-    line-height: 1.5;
+    line-height: 1.2;
     margin: 0;
     padding: 0;
   }
