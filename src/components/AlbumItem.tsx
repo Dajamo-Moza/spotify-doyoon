@@ -3,23 +3,26 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import DynamicImage from './common/DynamicImage';
 import { AlbumImage, Track } from '@/types/common';
-import { trackListState } from '@/atoms/index';
+import { currentOpenAlbumState, trackListState } from '@/atoms/index';
 import { getAxiosData } from '@/utils/index';
 
 interface AlbumItemProps {
   id: string;
+  index: number;
   count: number;
   title: string;
   artist: string;
   images: AlbumImage[];
 }
 
-const AlbumItem = ({ id, count, title, artist, images }: AlbumItemProps): JSX.Element => {
+const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps): JSX.Element => {
+  const [currentOpenAlbum, setCurrentOpenAlbum] = useRecoilState<number>(currentOpenAlbumState);
   const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
   const [isItemOpen, setIsItemOpen] = useState(false);
 
-  const onOpenTrackList = () => {
+  const onOpenTrackList = (index: number) => {
     setIsItemOpen(!isItemOpen);
+    setCurrentOpenAlbum(index);
   };
 
   useEffect(() => {
@@ -48,7 +51,7 @@ const AlbumItem = ({ id, count, title, artist, images }: AlbumItemProps): JSX.El
       <ImageContainer>
         <DynamicImage images={images} />
       </ImageContainer>
-      <AlbumDesc onClick={onOpenTrackList}>
+      <AlbumDesc onClick={() => onOpenTrackList(index)}>
         <Headline>{count}</Headline>
         <Info>
           <Title>{title}</Title>
