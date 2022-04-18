@@ -1,7 +1,3 @@
-export interface MockType {
-  type: string;
-}
-
 export interface TodoContent {
   id: string;
   title: string;
@@ -24,4 +20,12 @@ export interface Album {
   release_date: string;
   artists: Artist[];
   images: AlbumImage[];
+  total_tracks: number;
+  tracks: Track[];
+}
+
+export interface Track {
+  id: string;
+  name: string;
+  artists: Artist[];
 }

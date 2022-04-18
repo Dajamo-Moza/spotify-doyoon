@@ -1,17 +1,7 @@
 import { atom, atomFamily } from 'recoil';
-import { TodoContent } from '../types/common';
+import { Track } from '../types/common';
 
-export const todoContentState = atom<TodoContent[]>({
-  key: 'todoContents',
+export const trackListState = atom<Track[]>({
+  key: 'trackList',
   default: [],
-});
-
-export const todoCompleteState = atomFamily<boolean, string>({
-  key: 'todoCompleteState',
-  default: false,
-});
-
-export const fontSizeState = atom<number>({
-  key: 'FontSize',
-  default: 12,
 });
