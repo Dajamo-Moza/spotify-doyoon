@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
 import { useAxiosGet } from '@/hooks/useAxios';
@@ -20,7 +20,7 @@ const AlbumList = (): JSX.Element => {
         newAlbumList.map((item, index) => (
           <AlbumItem
             key={`album-item-${index}`}
-            count={index}
+            count={index + 1}
             title={item.name}
             artist={item.artists[0].name}
             images={item.images}
@@ -32,6 +32,7 @@ const AlbumList = (): JSX.Element => {
 
 const StyledAlbumList = styled.div`
   display: flex;
+  flex-direction: column;
   flex-basis: 70%;
 `;
 
