@@ -16,6 +16,8 @@
       "@/pages/*": ["src/pages/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/types/*": ["src/types/*"],
+      "@/atoms/*": ["src/atoms/*"],
+      "@/utils/*": ["src/utils/*"],
       "@/assets/*": ["public/assets/*"]
     }
   }

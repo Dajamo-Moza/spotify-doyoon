@@ -1,31 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { AlbumImage } from '@/types/common';
 import DynamicImage from './common/DynamicImage';
+import { AlbumImage, Track } from '@/types/common';
+import { trackListState } from '@/atoms/index';
+import { getAxiosData } from '@/utils/index';
 
-const AlbumItem = ({
-  count,
-  title,
-  artist,
-  images,
-}: {
+interface AlbumItemProps {
+  id: string;
   count: number;
   title: string;
   artist: string;
   images: AlbumImage[];
-}): JSX.Element => {
+}
+
+const AlbumItem = ({ id, count, title, artist, images }: AlbumItemProps): JSX.Element => {
+  const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
+  const [isItemOpen, setIsItemOpen] = useState(false);
+
+  const onOpenTrackList = () => {
+    setIsItemOpen(!isItemOpen);
+  };
+
+  useEffect(() => {
+    const getTrackListData = async () => {
+      if (!isItemOpen) return;
+
+      try {
+        const trackListData = await getAxiosData<Track[]>({
+          url: `/albums/${id}`,
+          key: 'tracks',
+          params: {
+            market: 'KR',
+          },
+        });
+        setTrackList(trackListData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getTrackListData();
+  }, [isItemOpen]);
+
   return (
     <StyledAlbumItem>
       <ImageContainer>
         <DynamicImage images={images} />
       </ImageContainer>
-      <ItemDesc>
+      <AlbumDesc onClick={onOpenTrackList}>
         <Headline>{count}</Headline>
         <Info>
           <Title>{title}</Title>
           <Desc>{artist}</Desc>
         </Info>
-      </ItemDesc>
+      </AlbumDesc>
     </StyledAlbumItem>
   );
 };
@@ -45,7 +74,8 @@ const ImageContainer = styled.div`
   border-right: 0.1rem solid ${(props) => props.theme.color.black};
 `;
 
-const ItemDesc = styled.div`
+const AlbumDesc = styled.div`
+  cursor: pointer;
   display: flex;
   flex-basis: 100%;
   padding: ${(props) => `0 ${props.theme.gutter.size36}`};
