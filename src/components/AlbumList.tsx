@@ -51,13 +51,14 @@ const AlbumList = (): JSX.Element => {
     },
   ];
 
-  useAxiosGet({
+  const res = useAxiosGet({
     initialValue: [],
     url: '/browse/new-releases',
     params: {
       country: 'KR',
     },
   });
+  console.log('res', res);
 
   return (
     <StyledAlbumList>

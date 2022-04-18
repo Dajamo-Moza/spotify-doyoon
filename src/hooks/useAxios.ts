@@ -4,7 +4,7 @@ import axios from 'axios';
 const axiosClient = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 1000,
-  headers: { Authorization: process.env.AUTH_TOKEN },
+  headers: { Authorization: `Bearer ${process.env.AUTH_TOKEN}` },
 });
 
 interface AxiosCallType {
@@ -14,7 +14,7 @@ interface AxiosCallType {
   query?: Record<string, unknown>;
 }
 
-export const useAxiosGet = async ({ initialValue, url, params, query }: AxiosCallType) => {
+export const useAxiosGet = ({ initialValue, url, params, query }: AxiosCallType) => {
   const [responseValue, setResponseValue] = useState(initialValue);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const useAxiosGet = async ({ initialValue, url, params, query }: AxiosCal
     };
 
     getData();
-  }, [url, params]);
+  }, []);
 
   return responseValue;
 };
