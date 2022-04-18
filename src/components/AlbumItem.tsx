@@ -38,9 +38,10 @@ const StyledAlbumItem = styled.div`
 
 const ImageContainer = styled.div`
   box-sizing: content-box;
-  padding: 0 ${(props) => props.theme.gutter.size20};
+  padding: ${(props) => `${props.theme.gutter.size8} ${props.theme.gutter.size20}`};
   width: 14rem;
-  height: 12rem;
+  height: 14rem;
+  flex-shrink: 0;
   border-right: 0.1rem solid ${(props) => props.theme.color.black};
 `;
 
@@ -57,8 +58,8 @@ const Info = styled.div`
 `;
 
 const Headline = styled.p`
+  flex: 0 0 12rem;
   font-size: ${(props) => props.theme.font.size80};
-  margin-right: ${(props) => props.theme.gutter.size56};
 `;
 
 const Title = styled.h2`
