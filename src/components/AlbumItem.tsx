@@ -21,10 +21,10 @@ const AlbumItem = ({
       </ImageContainer>
       <ItemDesc>
         <Headline>{count}</Headline>
-        <div>
+        <Info>
           <Title>{title}</Title>
           <Desc>{artist}</Desc>
-        </div>
+        </Info>
       </ItemDesc>
     </StyledAlbumItem>
   );
@@ -41,14 +41,19 @@ const ImageContainer = styled.div`
   padding: 0 ${(props) => props.theme.gutter.size20};
   width: 14rem;
   height: 12rem;
+  border-right: 0.1rem solid ${(props) => props.theme.color.black};
 `;
 
 const ItemDesc = styled.div`
   display: flex;
   flex-basis: 100%;
-  padding: 0 ${(props) => props.theme.gutter.size36};
-  border-left: 0.1rem solid ${(props) => props.theme.color.black};
+  padding: ${(props) => `0 ${props.theme.gutter.size36}`};
   border-bottom: 0.1rem solid ${(props) => props.theme.color.black};
+  margin-left: ${(props) => props.theme.gutter.size20};
+`;
+
+const Info = styled.div`
+  transform: translateY(1.1em);
 `;
 
 const Headline = styled.p`
@@ -58,7 +63,7 @@ const Headline = styled.p`
 
 const Title = styled.h2`
   font-size: ${(props) => props.theme.font.size22};
-  margin-bottom: ${(props) => props.theme.gutter.size20};
+  margin-bottom: ${(props) => props.theme.gutter.size12};
 `;
 
 const Desc = styled.h3`

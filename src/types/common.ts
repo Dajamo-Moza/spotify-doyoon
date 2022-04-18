@@ -13,3 +13,15 @@ export interface AlbumImage {
   height: number;
   url: string;
 }
+
+export interface Artist {
+  id: string;
+  name: string;
+}
+export interface Album {
+  id: string;
+  name: string;
+  release_date: string;
+  artists: Artist[];
+  images: AlbumImage[];
+}
