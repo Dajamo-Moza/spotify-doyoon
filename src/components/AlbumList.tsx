@@ -1,11 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
 import { getAxiosData } from '@/utils/index';
 import { Album } from '@/types/common';
+import { currentOpenAlbumState } from '@/atoms/index';
+import TrackList from './TrackList';
+import { useRecoilValue } from 'recoil';
 
 const AlbumList = (): JSX.Element => {
   const [albumList, setAlbumList] = useState<Album[]>([]);
+  const currentOpenAlbum = useRecoilValue(currentOpenAlbumState);
 
   useEffect(() => {
     const getAlbumListData = async () => {
@@ -27,14 +31,18 @@ const AlbumList = (): JSX.Element => {
     <StyledAlbumList>
       {albumList.length > 0 &&
         albumList.map((item, index) => (
-          <AlbumItem
-            key={`album-item-${item.id}`}
-            id={item.id}
-            count={index + 1}
-            title={item.name}
-            artist={item.artists[0].name}
-            images={item.images}
-          />
+          <Fragment key={`album-item-${item.id}`}>
+            <AlbumItem
+              key={`album-item-${item.id}`}
+              id={item.id}
+              index={index}
+              count={index + 1}
+              title={item.name}
+              artist={item.artists[0].name}
+              images={item.images}
+            />
+            {currentOpenAlbum === index && <TrackList key={`track-list-${index}`} />}
+          </Fragment>
         ))}
     </StyledAlbumList>
   );
