@@ -20,20 +20,13 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
   const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
   const [isItemOpen, setIsItemOpen] = useState(false);
 
-  const initOpenList = () => {
-    setIsItemOpen(false);
-  };
-
   const onOpenTrackList = (index: number) => {
-    initOpenList();
-    setIsItemOpen(true);
     setCurrentOpenIndex(index);
   };
 
   useEffect(() => {
     const getTrackListData = async () => {
       if (!isItemOpen) return;
-
       try {
         const trackListData = await getAxiosData<Track[]>({
           url: `/albums/${id}`,
@@ -49,15 +42,26 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
     };
 
     getTrackListData();
-  }, [isItemOpen]);
+  }, [currentOpenIndex]);
+
+  useEffect(() => {
+    if (!currentOpenIndex) return;
+
+    setIsItemOpen(true);
+  }, [currentOpenIndex]);
+
+  const openHandler = (index: number): boolean => {
+    return currentOpenIndex === index && isItemOpen;
+  };
 
   return (
-    <StyledAlbumItem isItemOpen={isItemOpen}>
-      <TrackContainer isItemOpen={isItemOpen}>
-        <ImageContainer isItemOpen={isItemOpen}>
+    <StyledAlbumItem isItemOpen={openHandler(index)}>
+      <TrackContainer isItemOpen={openHandler(index)}>
+        currentOpenIndex:{currentOpenIndex}
+        <ImageContainer isItemOpen={openHandler(index)}>
           <DynamicImage images={images} />
         </ImageContainer>
-        {isItemOpen && currentOpenIndex === index && <TrackList key={`track-list-${index}`} />}
+        {openHandler(index) && <TrackList key={`track-list-${index}`} />}
       </TrackContainer>
       <AlbumDesc onClick={() => onOpenTrackList(index)}>
         <Headline>{count}</Headline>
