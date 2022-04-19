@@ -13,8 +13,9 @@ const TrackList = () => {
   );
 };
 
-const StyledTrackList = styled.div`
-  border-bottom: 0.1rem solid ${(props) => props.theme.color.black};
+const StyledTrackList = styled.ul`
+  width: 100%;
+  border: 1px solid blue;
 `;
 
 export default TrackList;

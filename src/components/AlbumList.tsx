@@ -52,6 +52,10 @@ const StyledAlbumList = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 70%;
+
+  li:not(:last-child) {
+    border-bottom: 0.1rem solid pink;
+  }
 `;
 
 export default AlbumList;

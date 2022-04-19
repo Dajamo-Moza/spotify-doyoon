@@ -5,8 +5,8 @@ const TrackItem = ({ name }: { name: string }) => {
   return <StyledTrackItem>{name}</StyledTrackItem>;
 };
 
-const StyledTrackItem = styled.div`
-  border-bottom: 0.1rem solid ${(props) => props.theme.color.black};
+const StyledTrackItem = styled.li`
+  font-size: 2rem;
 `;
 
 export default TrackItem;

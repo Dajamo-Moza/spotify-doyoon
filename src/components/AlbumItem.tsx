@@ -47,8 +47,8 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
   }, [isItemOpen]);
 
   return (
-    <StyledAlbumItem>
-      <ImageContainer>
+    <StyledAlbumItem isItemOpen={isItemOpen}>
+      <ImageContainer isItemOpen={isItemOpen}>
         <DynamicImage images={images} />
       </ImageContainer>
       <AlbumDesc onClick={() => onOpenTrackList(index)}>
@@ -62,19 +62,24 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
   );
 };
 
-const StyledAlbumItem = styled.div`
+interface isItemOpenProps {
+  isItemOpen: boolean;
+}
+
+const StyledAlbumItem = styled.div<isItemOpenProps>`
   display: flex;
+  flex-direction: ${({ isItemOpen }) => (isItemOpen ? 'column-reverse' : 'row')};
   width: 100%;
   font-weight: 700;
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<isItemOpenProps>`
   box-sizing: content-box;
   padding: ${(props) => `${props.theme.gutter.size8} ${props.theme.gutter.size20}`};
-  width: 14rem;
-  height: 14rem;
   flex-shrink: 0;
-  border-right: 0.1rem solid ${(props) => props.theme.color.black};
+  width: ${({ isItemOpen }) => (isItemOpen ? '30rem' : '14rem')};
+  height: ${({ isItemOpen }) => (isItemOpen ? '30rem' : '14rem')};
+  border-right: ${({ theme, isItemOpen }) => !isItemOpen && `0.1rem solid ${theme.color.black}`};
 `;
 
 const AlbumDesc = styled.div`
