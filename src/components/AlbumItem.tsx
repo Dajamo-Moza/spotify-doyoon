@@ -18,15 +18,21 @@ interface AlbumItemProps {
 const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps): JSX.Element => {
   const [currentOpenIndex, setCurrentOpenIndex] = useRecoilState<number>(currentOpenIndexState);
   const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
-  const [isItemOpen, setIsItemOpen] = useState(false);
+  const [isCurrentOpen, setIsCurrentOpen] = useState(false);
 
   const onOpenTrackList = (index: number) => {
     setCurrentOpenIndex(index);
   };
 
   useEffect(() => {
+    if (!currentOpenIndex) return;
+
+    setIsCurrentOpen(currentOpenIndex === index);
+  }, [currentOpenIndex]);
+
+  useEffect(() => {
+    if (!isCurrentOpen) return;
     const getTrackListData = async () => {
-      if (!isItemOpen) return;
       try {
         const trackListData = await getAxiosData<Track[]>({
           url: `/albums/${id}`,
@@ -42,26 +48,15 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
     };
 
     getTrackListData();
-  }, [currentOpenIndex]);
-
-  useEffect(() => {
-    if (!currentOpenIndex) return;
-
-    setIsItemOpen(true);
-  }, [currentOpenIndex]);
-
-  const openHandler = (index: number): boolean => {
-    return currentOpenIndex === index && isItemOpen;
-  };
+  }, [isCurrentOpen]);
 
   return (
-    <StyledAlbumItem isItemOpen={openHandler(index)}>
-      <TrackContainer isItemOpen={openHandler(index)}>
-        currentOpenIndex:{currentOpenIndex}
-        <ImageContainer isItemOpen={openHandler(index)}>
+    <StyledAlbumItem isCurrentOpen={isCurrentOpen}>
+      <TrackContainer isCurrentOpen={isCurrentOpen}>
+        <ImageContainer isCurrentOpen={isCurrentOpen}>
           <DynamicImage images={images} />
         </ImageContainer>
-        {openHandler(index) && <TrackList key={`track-list-${index}`} />}
+        {isCurrentOpen && <TrackList key={`track-list-${index}`} />}
       </TrackContainer>
       <AlbumDesc onClick={() => onOpenTrackList(index)}>
         <Headline>{count}</Headline>
@@ -74,29 +69,29 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
   );
 };
 
-interface isItemOpenProps {
-  isItemOpen: boolean;
+interface isCurrentOpenProps {
+  isCurrentOpen: boolean;
 }
 
-const StyledAlbumItem = styled.div<isItemOpenProps>`
+const StyledAlbumItem = styled.div<isCurrentOpenProps>`
   display: flex;
-  flex-direction: ${({ isItemOpen }) => (isItemOpen ? 'column-reverse' : 'row')};
+  flex-direction: ${({ isCurrentOpen }) => (isCurrentOpen ? 'column-reverse' : 'row')};
   width: 100%;
   font-weight: 700;
 `;
 
-const TrackContainer = styled.div<isItemOpenProps>`
+const TrackContainer = styled.div<isCurrentOpenProps>`
   display: flex;
   flex-direction: row;
 `;
 
-const ImageContainer = styled.div<isItemOpenProps>`
+const ImageContainer = styled.div<isCurrentOpenProps>`
   box-sizing: content-box;
   padding: ${(props) => `${props.theme.gutter.size8} ${props.theme.gutter.size20}`};
   flex-shrink: 0;
-  width: ${({ isItemOpen }) => (isItemOpen ? '30rem' : '14rem')};
-  height: ${({ isItemOpen }) => (isItemOpen ? '30rem' : '14rem')};
-  border-right: ${({ theme, isItemOpen }) => !isItemOpen && `0.1rem solid ${theme.color.black}`};
+  width: ${({ isCurrentOpen }) => (isCurrentOpen ? '30rem' : '14rem')};
+  height: ${({ isCurrentOpen }) => (isCurrentOpen ? '30rem' : '14rem')};
+  border-right: ${({ theme, isCurrentOpen }) => !isCurrentOpen && `0.1rem solid ${theme.color.black}`};
 `;
 
 const AlbumDesc = styled.div`
