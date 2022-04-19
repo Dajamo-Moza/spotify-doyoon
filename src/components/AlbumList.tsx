@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
 import { getAxiosData } from '@/utils/index';
 import { Album } from '@/types/common';
-import { currentOpenAlbumState } from '@/atoms/index';
-import TrackList from './TrackList';
+// import { currentOpenIndexState } from '@/atoms/index';
+// import TrackList from './TrackList';
 import { useRecoilValue } from 'recoil';
 
 const AlbumList = (): JSX.Element => {
   const [albumList, setAlbumList] = useState<Album[]>([]);
-  const currentOpenAlbum = useRecoilValue(currentOpenAlbumState);
+  // const currentOpenIndex = useRecoilValue(currentOpenIndexState);
 
   useEffect(() => {
     const getAlbumListData = async () => {
@@ -41,7 +41,6 @@ const AlbumList = (): JSX.Element => {
               artist={item.artists[0].name}
               images={item.images}
             />
-            {currentOpenAlbum === index && <TrackList key={`track-list-${index}`} />}
           </Fragment>
         ))}
     </StyledAlbumList>

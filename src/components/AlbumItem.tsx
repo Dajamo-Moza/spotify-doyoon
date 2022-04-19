@@ -3,9 +3,9 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import DynamicImage from './common/DynamicImage';
 import { AlbumImage, Track } from '@/types/common';
-import { currentOpenAlbumState, trackListState } from '@/atoms/index';
+import { currentOpenIndexState, trackListState } from '@/atoms/index';
 import { getAxiosData } from '@/utils/index';
-
+import TrackList from '@/components/TrackList';
 interface AlbumItemProps {
   id: string;
   index: number;
@@ -16,13 +16,18 @@ interface AlbumItemProps {
 }
 
 const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps): JSX.Element => {
-  const [currentOpenAlbum, setCurrentOpenAlbum] = useRecoilState<number>(currentOpenAlbumState);
+  const [currentOpenIndex, setCurrentOpenIndex] = useRecoilState<number>(currentOpenIndexState);
   const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
   const [isItemOpen, setIsItemOpen] = useState(false);
 
+  const initOpenList = () => {
+    setIsItemOpen(false);
+  };
+
   const onOpenTrackList = (index: number) => {
-    setIsItemOpen(!isItemOpen);
-    setCurrentOpenAlbum(index);
+    initOpenList();
+    setIsItemOpen(true);
+    setCurrentOpenIndex(index);
   };
 
   useEffect(() => {
@@ -48,9 +53,12 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
 
   return (
     <StyledAlbumItem isItemOpen={isItemOpen}>
-      <ImageContainer isItemOpen={isItemOpen}>
-        <DynamicImage images={images} />
-      </ImageContainer>
+      <TrackContainer isItemOpen={isItemOpen}>
+        <ImageContainer isItemOpen={isItemOpen}>
+          <DynamicImage images={images} />
+        </ImageContainer>
+        {isItemOpen && currentOpenIndex === index && <TrackList key={`track-list-${index}`} />}
+      </TrackContainer>
       <AlbumDesc onClick={() => onOpenTrackList(index)}>
         <Headline>{count}</Headline>
         <Info>
@@ -71,6 +79,11 @@ const StyledAlbumItem = styled.div<isItemOpenProps>`
   flex-direction: ${({ isItemOpen }) => (isItemOpen ? 'column-reverse' : 'row')};
   width: 100%;
   font-weight: 700;
+`;
+
+const TrackContainer = styled.div<isItemOpenProps>`
+  display: flex;
+  flex-direction: row;
 `;
 
 const ImageContainer = styled.div<isItemOpenProps>`

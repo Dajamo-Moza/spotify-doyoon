@@ -6,7 +6,7 @@ export const trackListState = atom<Track[]>({
   default: [],
 });
 
-export const currentOpenAlbumState = atom<number>({
-  key: 'currentOpenAlbum',
+export const currentOpenIndexState = atom<number>({
+  key: 'currentOpenIndex',
   default: 0,
 });
