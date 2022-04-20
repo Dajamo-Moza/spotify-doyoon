@@ -28,8 +28,7 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
   };
 
   useEffect(() => {
-    if (!currentOpenIndex) return;
-
+    if (currentOpenIndex === null) return;
     setIsCurrentOpen(currentOpenIndex === index);
   }, [currentOpenIndex]);
 
