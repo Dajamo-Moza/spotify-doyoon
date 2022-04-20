@@ -6,6 +6,9 @@ import { AlbumImage, Track } from '@/types/common';
 import { currentOpenIndexState, trackListState } from '@/atoms/index';
 import { getAxiosData } from '@/utils/index';
 import TrackList from '@/components/TrackList';
+import PlusIcon from '@/assets/plus.svg';
+import HeartIcon from '@/assets/heart.svg';
+
 interface AlbumItemProps {
   id: string;
   index: number;
@@ -63,12 +66,16 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
         </ImageContainer>
         {isCurrentOpen && <TrackList key={`track-list-${index}`} />}
       </TrackContainer>
-      <AlbumDesc onClick={() => onOpenTrackList(index)}>
+      <AlbumDesc isCurrentOpen={isCurrentOpen} onClick={() => onOpenTrackList(index)}>
         <Headline>{count}</Headline>
         <Info>
           <Title>{title}</Title>
           <Desc>{artist}</Desc>
         </Info>
+        <AbsoluteBox>
+          <PlusIcon />
+          <HeartIcon />
+        </AbsoluteBox>
       </AlbumDesc>
     </StyledAlbumItem>
   );
@@ -99,13 +106,21 @@ const ImageContainer = styled.div<isCurrentOpenProps>`
   border-right: ${({ theme, isCurrentOpen }) => !isCurrentOpen && `0.1rem solid ${theme.color.black}`};
 `;
 
-const AlbumDesc = styled.div`
+const AlbumDesc = styled.div<isCurrentOpenProps>`
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
-  flex-basis: 100%;
+  flex-basis: ${({ isCurrentOpen }) => (isCurrentOpen ? 0 : '70rem')};
+  position: relative;
   padding: ${(props) => `0 ${props.theme.gutter.size36}`};
   border-bottom: 0.1rem solid ${(props) => props.theme.color.black};
   margin-left: ${(props) => props.theme.gutter.size20};
+`;
+
+const AbsoluteBox = styled.div`
+  position: absolute;
+  top: ${(props) => props.theme.gutter.size16};
+  right: ${(props) => props.theme.gutter.size12};
 `;
 
 const Info = styled.div`
