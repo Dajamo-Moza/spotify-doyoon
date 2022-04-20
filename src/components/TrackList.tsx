@@ -15,7 +15,7 @@ const TrackList = () => {
 
 const StyledTrackList = styled.ul`
   width: 100%;
-  border: 1px solid blue;
+  padding: ${({ theme }) => theme.gutter.size12} 0;
 `;
 
 export default TrackList;

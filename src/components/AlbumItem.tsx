@@ -32,6 +32,7 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
 
   useEffect(() => {
     if (!isCurrentOpen) return;
+
     const getTrackListData = async () => {
       try {
         const trackListData = await getAxiosData<Track[]>({
@@ -47,7 +48,11 @@ const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps):
       }
     };
 
-    getTrackListData();
+    try {
+      getTrackListData();
+    } catch (err) {
+      console.error(err);
+    }
   }, [isCurrentOpen]);
 
   return (
