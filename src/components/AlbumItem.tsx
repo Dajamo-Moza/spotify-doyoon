@@ -119,7 +119,11 @@ const AlbumDesc = styled.div<isCurrentOpenProps>`
 const AbsoluteBox = styled.div`
   position: absolute;
   top: ${(props) => props.theme.gutter.size16};
-  right: ${(props) => props.theme.gutter.size12};
+  right: ${(props) => props.theme.gutter.size8};
+
+  svg ~ svg {
+    margin-left: 0.4rem;
+  }
 `;
 
 const Info = styled.div`
