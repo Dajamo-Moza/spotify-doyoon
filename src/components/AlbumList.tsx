@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
 import { getAxiosData } from '@/utils/index';
 import { Album } from '@/types/common';
-// import { currentOpenIndexState } from '@/atoms/index';
-// import TrackList from './TrackList';
-import { useRecoilValue } from 'recoil';
 
 const AlbumList = (): JSX.Element => {
   const [albumList, setAlbumList] = useState<Album[]>([]);
-  // const currentOpenIndex = useRecoilValue(currentOpenIndexState);
 
   useEffect(() => {
     const getAlbumListData = async () => {
@@ -21,7 +17,6 @@ const AlbumList = (): JSX.Element => {
         },
       });
 
-      console.log(albumListData);
       setAlbumList(albumListData);
     };
     getAlbumListData();
@@ -52,8 +47,12 @@ const StyledAlbumList = styled.div`
   flex-direction: column;
   flex-basis: 70%;
 
-  li:not(:last-child) {
-    border-bottom: 0.1rem solid pink;
+  li {
+    padding: 0.2rem 0;
+
+    &:not(:last-child) {
+      border-bottom: 0.1rem solid ${({ theme }) => theme.color.black};
+    }
   }
 `;
 
