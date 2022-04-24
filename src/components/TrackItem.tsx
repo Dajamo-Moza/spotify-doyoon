@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import HeartIcon from '@/assets/heart.svg';
 import { useRecoilState } from 'recoil';
 import { isPlaylistModalOpenState, currentSavingIdState } from '@/atoms/index';
-import { Track } from '@/types/common';
 
 const TrackItem = ({ name, id }: { name: string; id: string }) => {
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);

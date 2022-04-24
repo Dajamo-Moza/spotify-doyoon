@@ -1,1 +1,1 @@
-export * from './getData';
+export * from './axiosHandler';

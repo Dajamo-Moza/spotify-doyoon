@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PlaylistItem from '@/components/PlaylistItem';
-import { getAxiosData } from '@/utils/getData';
-import CloseIcon from '@/assets/close.svg';
 import { useRecoilState } from 'recoil';
 import { isPlaylistModalOpenState } from '@/atoms/index';
+import { getAxiosData, postAxiosData } from '@/utils/axiosHandler';
+import CloseIcon from '@/assets/close.svg';
+import PlaylistItem from '@/components/PlaylistItem';
 import PlaylistAddButton from '@/components/PlaylistAddButton';
 interface PlayList {
   id: string;
@@ -14,6 +14,10 @@ interface PlayList {
 const PlaylistModal = () => {
   const [playList, setPlayList] = useState<PlayList[]>([]);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);
+
+  useEffect(() => {
+    getPlayListData();
+  }, []);
 
   const getPlayListData = async () => {
     const data = await getAxiosData<PlayList[]>({
@@ -25,18 +29,27 @@ const PlaylistModal = () => {
     setPlayList(data);
   };
 
-  useEffect(() => {
-    getPlayListData();
-  }, []);
+  const onClickAddBtn = () => {
+    console.log('onClickAddBtn');
+    // TODO: Add logic to get userId info
+    const userId = 'mtc7tndk6967yf89bf4oa8f9t';
+
+    postAxiosData({
+      url: `/users/${userId}/playlists`,
+      body: {
+        name: 'THITIW',
+      },
+    });
+  };
 
   return (
     <StyledPlaylistModal isModalOpen={isModalOpen}>
-      <Title>MY PLALISTS</Title>
+      <Title>MY PLAYLISTS</Title>
       <AbsoluteBox>
         <CloseIcon onClick={() => setIsModalOpen(false)} />
       </AbsoluteBox>
-      {playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} name={item.name} />)}
-      <PlaylistAddButton />
+      {playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} id={item.id} name={item.name} />)}
+      <PlaylistAddButton onClick={onClickAddBtn} />
     </StyledPlaylistModal>
   );
 };

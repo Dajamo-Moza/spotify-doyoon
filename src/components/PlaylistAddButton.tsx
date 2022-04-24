@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import PlusIcon from '@/assets/plus.svg';
 
-const PlaylistAddButton = () => {
+interface PlaylistAddButtonProps {
+  onClick: () => void;
+}
+
+const PlaylistAddButton = (props: PlaylistAddButtonProps) => {
   return (
     <StyledPlaylistAddButton>
       <PlusIcon />
@@ -11,7 +15,8 @@ const PlaylistAddButton = () => {
   );
 };
 
-const StyledPlaylistAddButton = styled.li`
+const StyledPlaylistAddButton = styled.button`
+  border: 1px solid red;
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.color.primary};
