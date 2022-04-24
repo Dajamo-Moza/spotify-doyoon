@@ -4,11 +4,11 @@ import AlbumItem from '@/components/AlbumItem';
 import { currentOpenIndexState } from '@/atoms/index';
 import { getAxiosData } from '@/utils/index';
 import { Album } from '@/types/common';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 const AlbumList = (): JSX.Element => {
   const [albumList, setAlbumList] = useState<Album[]>([]);
-  const [currentOpenIndex, setCurrentOpenIndex] = useRecoilState<number>(currentOpenIndexState);
+  const currentOpenIndex = useRecoilValue<number>(currentOpenIndexState);
 
   const getAlbumListData = async () => {
     const data = await getAxiosData<Album[]>({
