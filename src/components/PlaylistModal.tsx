@@ -20,6 +20,7 @@ const PlaylistModal = () => {
   }, []);
 
   const getPlayListData = async () => {
+    // TODO: 다른사람이 만든 플레이리스트는 보여주지 않아야함
     const data = await getAxiosData<PlayList[]>({
       url: '/me/playlists',
       params: {

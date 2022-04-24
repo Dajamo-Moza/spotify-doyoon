@@ -16,11 +16,7 @@ const PlaylistItem = ({ id, name }: { id: string; name: string }) => {
     });
   };
 
-  return (
-    <StyledPlaylistItem>
-      <button onClick={() => onAddTrackToPlaylist(currentSaving)}>{name}</button>
-    </StyledPlaylistItem>
-  );
+  return <StyledPlaylistItem onClick={() => onAddTrackToPlaylist(currentSaving)}>{name}</StyledPlaylistItem>;
 };
 
 const StyledPlaylistItem = styled.li`
