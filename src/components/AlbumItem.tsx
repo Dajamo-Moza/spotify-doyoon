@@ -16,50 +16,36 @@ interface AlbumItemProps {
   title: string;
   artist: string;
   images: AlbumImage[];
+  isCurrentOpen: boolean;
 }
 
-const AlbumItem = ({ id, index, count, title, artist, images }: AlbumItemProps): JSX.Element => {
-  const [currentOpenIndex, setCurrentOpenIndex] = useRecoilState<number>(currentOpenIndexState);
+const AlbumItem = ({ id, index, count, title, artist, images, isCurrentOpen }: AlbumItemProps): JSX.Element => {
   const [trackList, setTrackList] = useRecoilState<Track[]>(trackListState);
-  const [isCurrentOpen, setIsCurrentOpen] = useState(false);
+  const [currentOpenIndex, setCurrentOpenIndex] = useRecoilState<number>(currentOpenIndexState);
 
-  const onOpenTrackList = (index: number) => {
-    setCurrentOpenIndex(index);
-  };
-
-  useEffect(() => {
-    if (currentOpenIndex === null) return;
-    setIsCurrentOpen(currentOpenIndex === index);
-  }, [currentOpenIndex]);
-
-  useEffect(() => {
-    if (!isCurrentOpen) return;
-
-    const getTrackListData = async () => {
-      try {
-        const trackListData = await getAxiosData<Track[]>({
-          url: `/albums/${id}`,
-          key: 'tracks',
-          params: {
-            market: 'KR',
-          },
-        });
-        setTrackList(trackListData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
+  const getTrackListData = async () => {
     try {
-      getTrackListData();
+      const trackListData = await getAxiosData<Track[]>({
+        url: `/albums/${id}`,
+        key: 'tracks',
+        params: {
+          market: 'KR',
+        },
+      });
+      setTrackList(trackListData);
     } catch (err) {
       console.error(err);
     }
-  }, [isCurrentOpen]);
+  };
+
+  const onOpenTrackList = async (index: number) => {
+    await getTrackListData();
+    setCurrentOpenIndex(index);
+  };
 
   return (
     <StyledAlbumItem isCurrentOpen={isCurrentOpen}>
-      <TrackContainer isCurrentOpen={isCurrentOpen}>
+      <TrackContainer>
         <ImageContainer isCurrentOpen={isCurrentOpen}>
           <DynamicImage images={images} />
         </ImageContainer>
@@ -91,7 +77,7 @@ const StyledAlbumItem = styled.div<isCurrentOpenProps>`
   font-weight: 700;
 `;
 
-const TrackContainer = styled.div<isCurrentOpenProps>`
+const TrackContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
