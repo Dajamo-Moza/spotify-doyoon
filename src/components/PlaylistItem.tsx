@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { currentSavingIdState } from '@/atoms/index';
+import { postAxiosData } from '@/utils/index';
 
-const PlaylistItem = ({ name }: { name: string }) => {
-  return <StyledPlaylistItem>{name}</StyledPlaylistItem>;
+const PlaylistItem = ({ id, name }: { id: string; name: string }) => {
+  const currentSaving = useRecoilValue<string>(currentSavingIdState);
+
+  const onAddTrackToPlaylist = (currentSavingTrackId: string) => {
+    postAxiosData({
+      url: `/playlists/${id}/tracks`,
+      query: {
+        uris: `spotify:track:${currentSavingTrackId}`,
+      },
+    });
+  };
+
+  return (
+    <StyledPlaylistItem>
+      <button onClick={() => onAddTrackToPlaylist(currentSaving)}>{name}</button>
+    </StyledPlaylistItem>
+  );
 };
 
 const StyledPlaylistItem = styled.li`
