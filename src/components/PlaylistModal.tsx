@@ -5,7 +5,7 @@ import { getAxiosData } from '@/utils/getData';
 import CloseIcon from '@/assets/close.svg';
 import { useRecoilState } from 'recoil';
 import { isPlaylistModalOpenState } from '@/atoms/index';
-
+import PlaylistAddButton from '@/components/PlaylistAddButton';
 interface PlayList {
   id: string;
   name: string;
@@ -35,7 +35,8 @@ const PlaylistModal = () => {
       <AbsoluteBox>
         <CloseIcon onClick={() => setIsModalOpen(false)} />
       </AbsoluteBox>
-      {playList?.length > 0 && playList.map((item) => <PlaylistItem name={item.name} />)}
+      {playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} name={item.name} />)}
+      <PlaylistAddButton />
     </StyledPlaylistModal>
   );
 };
