@@ -22,6 +22,7 @@ export interface Album {
   images: AlbumImage[];
   total_tracks: number;
   tracks: Track[];
+  isCurrentOpen: boolean;
 }
 
 export interface Track {
