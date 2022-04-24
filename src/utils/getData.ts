@@ -8,21 +8,34 @@ const axiosClient = axios.create({
 
 interface AxiosCallType<T> {
   url: string;
-  key: string;
+  key?: string;
   params?: Record<string, unknown>;
 }
 
 export const getAxiosData = async <T>({ url, key, params }: AxiosCallType<T>): Promise<T> => {
-  try {
-    const {
-      data: {
-        [key]: { items },
-      },
-    } = await axiosClient.get(url, { params });
+  if (key) {
+    try {
+      const {
+        data: {
+          [key]: { items },
+        },
+      } = await axiosClient.get(url, { params });
 
-    return items;
-  } catch (err) {
-    console.error(err);
-    return err;
+      return items;
+    } catch (err) {
+      console.error(err);
+      return err;
+    }
+  } else {
+    try {
+      const {
+        data: { items },
+      } = await axiosClient.get(url, { params });
+
+      return items;
+    } catch (err) {
+      console.error(err);
+      return err;
+    }
   }
 };
