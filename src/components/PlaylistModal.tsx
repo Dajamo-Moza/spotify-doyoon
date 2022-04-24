@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PlaylistItem from '@/components/PlaylistItem';
 import { getAxiosData } from '@/utils/getData';
 import CloseIcon from '@/assets/close.svg';
+import { useRecoilState } from 'recoil';
+import { isPlaylistModalOpenState } from '@/atoms/index';
 
 interface PlayList {
   id: string;
@@ -11,6 +13,8 @@ interface PlayList {
 
 const PlaylistModal = () => {
   const [playList, setPlayList] = useState<PlayList[]>([]);
+  const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);
+
   const getPlayListData = async () => {
     const data = await getAxiosData<PlayList[]>({
       url: '/me/playlists',
@@ -26,18 +30,18 @@ const PlaylistModal = () => {
   }, []);
 
   return (
-    <StyledPlaylistModal>
+    <StyledPlaylistModal isModalOpen={isModalOpen}>
       <Title>MY PLALISTS</Title>
       <AbsoluteBox>
-        <CloseIcon />
+        <CloseIcon onClick={() => setIsModalOpen(false)} />
       </AbsoluteBox>
       {playList?.length > 0 && playList.map((item) => <PlaylistItem name={item.name} />)}
     </StyledPlaylistModal>
   );
 };
 
-const StyledPlaylistModal = styled.div`
-  display: flex;
+const StyledPlaylistModal = styled.div<{ isModalOpen: boolean }>`
+  display: ${({ isModalOpen }) => (isModalOpen ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   position: fixed;

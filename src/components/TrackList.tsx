@@ -8,7 +8,7 @@ const TrackList = () => {
   const trackList = useRecoilValue(trackListState);
   return (
     <StyledTrackList>
-      {trackList.length > 0 && trackList.map((track) => <TrackItem key={track.id} name={track.name} />)}
+      {trackList.length > 0 && trackList.map((track) => <TrackItem key={track.id} id={track.id} name={track.name} />)}
     </StyledTrackList>
   );
 };
