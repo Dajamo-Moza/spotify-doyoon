@@ -17,6 +17,16 @@ export const isPlaylistModalOpenState = atom<boolean>({
 });
 
 export const currentSavingIdState = atom<string>({
-  key: 'currentSavingIdState',
+  key: 'currentSavingId',
   default: null,
+});
+
+export const playlistNameState = atom<string>({
+  key: 'playlistName',
+  default: '',
+});
+
+export const isInputVisibleState = atom<boolean>({
+  key: 'isInputVisible',
+  default: false,
 });

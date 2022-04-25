@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { isPlaylistModalOpenState } from '@/atoms/index';
+import { isPlaylistModalOpenState, isInputVisibleState } from '@/atoms/index';
 import { getAxiosData, postAxiosData } from '@/utils/axiosHandler';
 import CloseIcon from '@/assets/close.svg';
 import PlaylistItem from '@/components/PlaylistItem';
@@ -14,6 +14,7 @@ interface PlayList {
 const PlaylistModal = () => {
   const [playList, setPlayList] = useState<PlayList[]>([]);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);
+  const [isInputVisible, setIsInputVisible] = useRecoilState<boolean>(isInputVisibleState);
 
   useEffect(() => {
     getPlayListData();
@@ -30,27 +31,21 @@ const PlaylistModal = () => {
     setPlayList(data);
   };
 
-  const onClickAddBtn = () => {
-    console.log('onClickAddBtn');
-    // TODO: Add logic to get userId info
-    const userId = 'mtc7tndk6967yf89bf4oa8f9t';
-
-    postAxiosData({
-      url: `/users/${userId}/playlists`,
-      body: {
-        name: 'THITIW',
-      },
-    });
-  };
-
   return (
     <StyledPlaylistModal isModalOpen={isModalOpen}>
       <Title>MY PLAYLISTS</Title>
       <AbsoluteBox>
         <CloseIcon onClick={() => setIsModalOpen(false)} />
       </AbsoluteBox>
-      {playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} id={item.id} name={item.name} />)}
-      <PlaylistAddButton onClick={onClickAddBtn} />
+      {isInputVisible ? (
+        <>
+          <NewPlaylistInput />
+          <SubmitButton>OK</SubmitButton>
+        </>
+      ) : (
+        playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} id={item.id} name={item.name} />)
+      )}
+      {!isInputVisible && <PlaylistAddButton />}
     </StyledPlaylistModal>
   );
 };
@@ -83,6 +78,19 @@ const AbsoluteBox = styled.div`
   position: absolute;
   top: 2rem;
   right: 3rem;
+`;
+
+const NewPlaylistInput = styled.input`
+  width: 100%;
+  height: 4rem;
+  text-indent: 1rem;
+  border: 0.1rem solid ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.black};
+`;
+
+const SubmitButton = styled.button`
+  margin-top: ${({ theme }) => theme.gutter.size16};
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 export default PlaylistModal;
