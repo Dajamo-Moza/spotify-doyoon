@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { isPlaylistModalOpenState, isInputVisibleState } from '@/atoms/index';
+import { isPlaylistModalOpenState, isInputVisibleState, playlistNameState } from '@/atoms/index';
 import { getAxiosData, postAxiosData } from '@/utils/axiosHandler';
 import CloseIcon from '@/assets/close.svg';
 import PlaylistItem from '@/components/PlaylistItem';
@@ -15,6 +15,7 @@ const PlaylistModal = () => {
   const [playList, setPlayList] = useState<PlayList[]>([]);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);
   const [isInputVisible, setIsInputVisible] = useRecoilState<boolean>(isInputVisibleState);
+  const [playlistName, setPlaylistName] = useRecoilState<string>(playlistNameState);
 
   useEffect(() => {
     getPlayListData();
@@ -31,6 +32,22 @@ const PlaylistModal = () => {
     setPlayList(data);
   };
 
+  const onInputNewPlaylist = (e: FormEvent<HTMLInputElement>) => {
+    setPlaylistName(e.currentTarget.value);
+  };
+
+  const saveNewPlaylist = async () => {
+    const userId = 'mtc7tndk6967yf89bf4oa8f9t';
+    await postAxiosData({
+      url: `/users/${userId}/playlists`,
+      body: {
+        name: playlistName,
+      },
+    });
+
+    setIsInputVisible(false);
+  };
+
   return (
     <StyledPlaylistModal isModalOpen={isModalOpen}>
       <Title>MY PLAYLISTS</Title>
@@ -39,8 +56,8 @@ const PlaylistModal = () => {
       </AbsoluteBox>
       {isInputVisible ? (
         <>
-          <NewPlaylistInput />
-          <SubmitButton>OK</SubmitButton>
+          <NewPlaylistInput onInput={onInputNewPlaylist} />
+          <SubmitButton onClick={saveNewPlaylist}>OK</SubmitButton>
         </>
       ) : (
         playList?.length > 0 && playList.map((item) => <PlaylistItem key={item.id} id={item.id} name={item.name} />)
