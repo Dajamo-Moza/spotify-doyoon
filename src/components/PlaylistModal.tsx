@@ -46,6 +46,7 @@ const PlaylistModal = () => {
     });
 
     setIsInputVisible(false);
+    getPlayListData();
   };
 
   return (
