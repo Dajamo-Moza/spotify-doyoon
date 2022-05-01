@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import HeartIcon from '@/assets/heart.svg';
 import { useRecoilState } from 'recoil';
 import { isPlaylistModalOpenState, currentSavingIdState } from '@/atoms/index';
+import HeartIcon from '@/assets/heart.svg';
+import DotsIcon from '@/assets/dots.svg';
 
 const TrackItem = ({ name, id }: { name: string; id: string }) => {
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(isPlaylistModalOpenState);
@@ -17,6 +18,9 @@ const TrackItem = ({ name, id }: { name: string; id: string }) => {
     <StyledTrackItem>
       <TrackName>{name}</TrackName>
       <AbsoluteBox>
+        <div className="dots-icon">
+          <DotsIcon />
+        </div>
         <HeartIcon onClick={saveTrackHandler} />
       </AbsoluteBox>
     </StyledTrackItem>
@@ -35,8 +39,14 @@ const TrackName = styled.div`
 `;
 
 const AbsoluteBox = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 1rem;
+
+  .dots-icon {
+    margin-right: 1rem;
+  }
 `;
 
 export default TrackItem;
