@@ -27,7 +27,6 @@ const PlaylistAddButton = () => {
 };
 
 const StyledPlaylistAddButton = styled.button`
-  border: 1px solid red;
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.color.primary};
