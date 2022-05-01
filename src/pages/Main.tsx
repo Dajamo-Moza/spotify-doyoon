@@ -27,7 +27,7 @@ const CoverBackground = styled.div<{ isModalOpen: boolean }>`
   height: 100%;
   position: fixed;
   background-color: black;
-  opacity: 0.3;
+  opacity: ${({ isModalOpen }) => (isModalOpen ? '0.3' : '0')};
 `;
 
 export default Main;
