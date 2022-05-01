@@ -37,7 +37,9 @@ const PlaylistModal = () => {
   };
 
   const saveNewPlaylist = async () => {
+    // TODO: Add logic to get userId info
     const userId = 'mtc7tndk6967yf89bf4oa8f9t';
+
     await postAxiosData({
       url: `/users/${userId}/playlists`,
       body: {

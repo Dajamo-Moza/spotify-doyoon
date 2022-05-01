@@ -13,8 +13,6 @@ const PlaylistAddButton = () => {
   const [isInputVisible, setIsInputVisible] = useRecoilState<boolean>(isInputVisibleState);
 
   const onClickAddBtn = () => {
-    // TODO: Add logic to get userId info
-
     setIsInputVisible(true);
   };
 
@@ -29,6 +27,7 @@ const PlaylistAddButton = () => {
 const StyledPlaylistAddButton = styled.button`
   display: flex;
   align-items: center;
+  margin-top: ${({ theme }) => theme.gutter.size16};
   color: ${({ theme }) => theme.color.primary};
   svg > path {
     fill: ${({ theme }) => theme.color.primary};
