@@ -2,12 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AlbumItem from '@/components/AlbumItem';
 import { currentOpenIndexState } from '@/atoms/index';
+import { useRecoilValue } from 'recoil';
 import { getAxiosData } from '@/utils/index';
 import { Album } from '@/types/common';
-import { useRecoilValue } from 'recoil';
 
 const AlbumList = (): JSX.Element => {
   const [albumList, setAlbumList] = useState<Album[]>([]);
+
   const currentOpenIndex = useRecoilValue<number>(currentOpenIndexState);
 
   const getAlbumListData = async () => {
