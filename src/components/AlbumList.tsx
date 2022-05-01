@@ -68,14 +68,6 @@ const StyledAlbumList = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 70%;
-
-  li {
-    padding: 0.2rem 0;
-
-    &:not(:last-child) {
-      border-bottom: 0.1rem solid ${({ theme }) => theme.color.black};
-    }
-  }
 `;
 
 export default AlbumList;

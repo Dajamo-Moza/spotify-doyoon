@@ -15,8 +15,10 @@ const TrackItem = ({ name, id }: { name: string; id: string }) => {
 
   return (
     <StyledTrackItem>
-      <p>{name}</p>
-      <HeartIcon onClick={saveTrackHandler} />
+      <TrackName>{name}</TrackName>
+      <AbsoluteBox>
+        <HeartIcon onClick={saveTrackHandler} />
+      </AbsoluteBox>
     </StyledTrackItem>
   );
 };
@@ -25,6 +27,16 @@ const StyledTrackItem = styled.li`
   font-size: 2rem;
   display: flex;
   justify-content: space-between;
+  position: relative;
+`;
+
+const TrackName = styled.div`
+  width: 29rem;
+`;
+
+const AbsoluteBox = styled.div`
+  position: absolute;
+  right: 1rem;
 `;
 
 export default TrackItem;
